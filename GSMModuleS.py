@@ -64,7 +64,7 @@ def SendMessage(id):
 
 GatewayOne = "+3584576330859"
 GatewayTwo = "+3584579227310"
-PhoneBackup = "+358469220980"
+PhoneBackup = "+358411362689"
 MaxAlt = 2000
 LastSMS = 'Start'
 MessageID = 0

@@ -64,7 +64,7 @@ def SendMessage(id):
 
 ReceiverOne = "+3584576330859"
 ReceiverTwo = "+3584579227310"
-PhoneBackup = "+358469220980"
+PhoneBackup = "+3584111362689"
 MaxAlt = 2000
 LastSMS = 'Start'
 MessageID = 0
