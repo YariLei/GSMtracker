@@ -62,8 +62,8 @@ def SendMessage(id):
 					print "Sending to Backup Phone " + PhoneBackup + ": " + Message
 					gsm.send_sms(PhoneBackup, Message)
 
-ReceiverOne = "+3584576330859"
-ReceiverTwo = "+3584579227310"
+ReceiverOne = "+3584579227310"
+ReceiverTwo = "+3584576330859"
 PhoneBackup = "+3584111362689"
 MaxAlt = 2000
 LastSMS = 'Start'
