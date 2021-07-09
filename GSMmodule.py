@@ -47,7 +47,7 @@ def SendMessage(id):
 
 			# Store tracking data in local file
 			f=open("SMS_Data.txt", "a")
-			Message = PayloadID + ' SMS' + id + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude)
+			Message = PayloadID + ' SMS' + id + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + '\n'
 			f.write(Message)
 			f.close()
 

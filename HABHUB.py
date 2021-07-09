@@ -58,7 +58,7 @@ while True:
 			print "Uploading sentence: " + sentence
 			UploadTelemetry('SMS_Gateway', sentence)
 		f=open("ReceiverOne_Data.txt", "a")
-		row = text + ' ' + str(datetime.now())
+		row = text + ' ' + str(datetime.now()) + '\n'
 		f.write(row)
 		f.close()
 	else:
