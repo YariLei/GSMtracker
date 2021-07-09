@@ -45,6 +45,12 @@ def SendMessage(id):
 			Longitude = float(Longitude)
 			Altitude = float(Altitude)
 
+			# Store tracking data in local file
+			f=open("SMS_Data.txt", "a")
+			Message = PayloadID + ' SMS' + id + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude)
+			f.write(Message)
+			f.close()
+			
 			# Check altitude vs. maximum allowed
 			if Altitude <= MaxAlt:				
 				# Send the message burst
