@@ -57,7 +57,7 @@ while True:
 			sentence = '$$' + packet + '*' + crc16_ccitt(packet.encode()) + '\n'
 			print "Uploading sentence: " + sentence
 			UploadTelemetry('SMS_Gateway', sentence)
-		f=open("ReceiverOne_Data.txt", "a")
+		f=open("ReceiverTwo_Data.txt", "a")
 		row = text + ' ' + datetime.now()
 		f.write(row)
 		f.close()
