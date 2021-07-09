@@ -50,25 +50,20 @@ def SendMessage(id):
 			Message = PayloadID + ' SMS' + id + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude)
 			f.write(Message)
 			f.close()
-			
+
 			# Check altitude vs. maximum allowed
 			if Altitude <= MaxAlt:				
 				# Send the message burst
 				Message = 'HAB:' + PayloadID + ',1,' + UTC + ',' + str(Latitude) + ',' + str(Longitude) + ',' + str(int(Altitude))
-				print "Sending to HabHub receiver at " + ReceiverOne + ": " + Message
-				gsm.send_sms(ReceiverOne, Message)
-				time.sleep(5)
-				Message = 'HUB:' + PayloadID + ' SMS' + id + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude)
-				print "Sending to Alternative Receiver " + ReceiverTwo + ": " + Message
+				print "Sending to HabHub receiver at " + ReceiverTwo + ": " + Message
 				gsm.send_sms(ReceiverTwo, Message)
 				time.sleep(5)
 				# Send to backup phone once every 4th message burst
-				if (id%4==0)
+				if (id%4==0):
 					Message = PayloadID + ' SMS' + id + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
 					print "Sending to Backup Phone " + PhoneBackup + ": " + Message
 					gsm.send_sms(PhoneBackup, Message)
 
-ReceiverOne = "+3584579227310"
 ReceiverTwo = "+3584576330859"
 PhoneBackup = "+358411362689"
 MaxAlt = 2000
@@ -120,7 +115,7 @@ while True:
 			SendMessage(MessageID)
 			MessageID = MessageID + 1
 			LastSMS = 'Start'
-			time.sleep(290)
+			time.sleep(295)
        		elif text[0:4] == 'Stop':
 			print "SMS operation halted"
 			GPSoff()
@@ -129,6 +124,6 @@ while True:
 		if LastSMS == 'Start':
 			SendMessage(MessageID)
 			MessageID = MessageID + 1
-			time.sleep(290)
+			time.sleep(295)
 		else:
 			time.sleep(60)
