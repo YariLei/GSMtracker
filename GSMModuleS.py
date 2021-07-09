@@ -16,7 +16,7 @@ def GPSoff():
 	print reply
 	print
     
-def SendStartMessage(id)
+def SendStartMessage(id):
 	reply = gsm.command('AT+CGNSINF')
 	list = reply[0].split(",")
 	UTC = list[2][8:10]+':'+list[2][10:12]+':'+list[2][12:14]
