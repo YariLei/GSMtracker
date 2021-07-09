@@ -24,8 +24,8 @@ def SendStartMessage(id):
 	Longitude = list[4]
 	Altitude = list[5]
 	print 'Position: ' + UTC + ', ' + Latitude + ', ' + Longitude + ', ' + Altitude
-	Message = ' SMS' + id + ' Service started. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
-	print "Sending SMS to phone number " + MobileNumber + ": " + Message
+	Message = ' SMS' + str(id) + ' Service started. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
+	print "Sending SMS to phone number " + PhoneBackup + ": " + Message
 	gsm.send_sms(PhoneBackup, Message)
 
 def SendMessage(id):
@@ -47,7 +47,7 @@ def SendMessage(id):
 
 			# Store tracking data in local file
 			f=open("SMS_Data.txt", "a")
-			Message = PayloadID + ' SMS' + id + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + '\n'
+			Message = PayloadID + ' SMS' + str(id) + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + '\n'
 			f.write(Message)
 			f.close()
 
@@ -60,7 +60,7 @@ def SendMessage(id):
 				time.sleep(5)
 				# Send to backup phone once every 4th message burst
 				if (id%4==0):
-					Message = PayloadID + ' SMS' + id + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
+					Message = PayloadID + ' SMS' + str(id) + '. Position: ' + UTC + ', ' + str(Latitude) + ', ' + str(Longitude) + ', ' + str(Altitude) + ' http://maps.google.com/?q=' + str(Latitude) + ',' + str(Longitude)
 					print "Sending to Backup Phone " + PhoneBackup + ": " + Message
 					gsm.send_sms(PhoneBackup, Message)
 
