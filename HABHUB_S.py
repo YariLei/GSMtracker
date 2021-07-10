@@ -46,6 +46,10 @@ if len(reply) > 1:
 	print "Phone number = " + phone
 	print
 
+print "Cleaning up old messages"
+gsm.query("AT+CMGD=70,4")
+print
+
 print "Ready to receive"
 while True:
 	message = gsm.next_message()
