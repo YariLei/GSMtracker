@@ -1,0 +1,70 @@
+# -*- coding: utf-8 -*-
+#! /bin/bash
+import numpy as np
+import cv2
+import time
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+
+VIDEO_BASE_FOLDER = '/home/pi/Videos/'
+VIDEO_LENGTH = 5*60*1000
+
+# global definitions
+current_time_ms = lambda: int(round(time.time() * 1000))
+
+# use this to define your file name builder, I just used the Unix time
+def get_video_filename(now):
+    return VIDEO_BASE_FOLDER+str(now)+'_video.h264'
+
+# the timestamp when the video write started
+video_time  = 0
+
+# main logic
+
+def see():
+    # initialize the camera and grab a reference
+    camera = PiCamera()
+    camera.resolution = (1920, 1080)
+    camera.framerate = 30
+    rawCapture = PiRGBArray(camera, size=(1920, 1080))
+    # allow the camera to warmup
+    time.sleep(0.1)
+    clock = current_time_ms()
+    video_time = clock
+    # start recording using piCamera API
+    camera.start_recording(get_video_filename(clock))
+    # grab one frame at the time from the stream
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        # grab the raw NumPy array representing the image
+     frame = frame.array
+        # bail if the camera stop sending frames.
+        # TODO roll your own, this is crude at best!
+        if frame==None:
+            break
+        # establish a time for the rest of the logic
+        now = current_time_ms()
+        # simultaneous detect and write
+        if video_time+VIDEO_LENGTH<now:
+            # close the current file
+            camera.stop_recording()
+            video_time = now
+            # open a new file and start recording
+            camera.start_recording(get_video_filename(now))
+
+# TODO add your magic here
+        
+        filename = "/home/pi/Videos/image_" + str(datetime.now().strftime("%d-%m-%Y_%I-%M-%S_%p"))  + ".jpg"
+        cv2.imwrite(filename, frame)
+        k = cv2.waitKey(30) & 0xff
+        if k == 27:
+            break
+            
+# clear the stream in preparation for the next frame
+     rawCapture.truncate(0)
+
+print 'shutting down'
+    # save the last video file before shutting down
+    camera.stop_recording()
+    cv2.destroyAllWindows()
+
+see()
