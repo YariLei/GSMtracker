@@ -6,7 +6,7 @@ MAX_FILES = 999
 DURATION = 5
 SPACE_LIMIT = 95
 
-file_root = "/home/pi/Videos/"
+file_root = "/home/pi/videos/"
 
 if(psutil.disk_usage(".").percent > SPACE_LIMIT):
 	print('WARNING: Low space!')
